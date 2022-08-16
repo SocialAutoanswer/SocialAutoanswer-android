@@ -16,3 +16,5 @@ rootProject.name = "SocialAutoanswer"
 include ':app'
 include ':core-android'
 include ':feature-contacts'
+include ':core-reply'
+include ':core-navigation'
