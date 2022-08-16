@@ -23,8 +23,9 @@ abstract class BaseRecyclerViewAdapter<DATA : Any, B : ViewBinding>
     }
 
     fun addItems(items: List<DATA>) {
+        val size = this.items.size
         this.items.addAll(items)
-        notifyDataSetChanged()//TODO: Выбрать более оптимизированный метод
+        notifyItemRangeChanged( size + 1, size + items.size)
     }
 
     @SuppressLint("NotifyDataSetChanged")
