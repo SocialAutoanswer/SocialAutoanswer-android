@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/redactContactFragment"
-        android:name="ru.bibaboba.feature_contacts.ContactsFragment.RedactContactFragment"
+        android:name="ru.bibaboba.feature_contacts.RedactContactFragment"
         android:label="RedactContactFragment">
     </fragment>
 
