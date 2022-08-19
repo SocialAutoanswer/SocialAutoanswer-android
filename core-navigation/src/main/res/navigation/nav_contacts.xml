@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_contacts">
+    android:id="@+id/nav_contacts"
+    app:startDestination="@id/contactsFragment">
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="ru.bibaboba.feature_contacts.ContactsFragment.ContactsFragment"
+        android:label="ContactsFragment">
+        <action
+            android:id="@+id/action_contactsFragment_to_redactContactFragment"
+            app:destination="@id/redactContactFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/redactContactFragment"
+        android:name="ru.bibaboba.feature_contacts.ContactsFragment.RedactContactFragment"
+        android:label="RedactContactFragment">
+    </fragment>
 
 </navigation>
