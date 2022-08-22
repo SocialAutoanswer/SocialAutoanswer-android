@@ -13,18 +13,30 @@ class ContactsViewModel: ViewModel() {
     @Inject lateinit var repository: ContactRepository
 
     private val contacts = MutableLiveData<ArrayList<Contact>>()
+    private val contact = MutableLiveData<Contact>()
 
     fun setContactsObserver(observer: (ArrayList<Contact>) -> Unit) =
         contacts.observeForever(observer)
 
-    fun getAllContacts() = repository.getAllContacts()
+    fun setContactObserver(observer: (Contact) -> Unit) =
+        contact.observeForever(observer)
+
+    fun getAllContacts(): Disposable = repository.getAllContacts()
         .subscribe({
             contacts.postValue(it as ArrayList<Contact>)
         }, {
 
         })
 
-    fun addContact(contact: Contact) = repository.addContact(contact)
+    fun addContact(contact: Contact): Disposable = repository.addContact(contact)
+        .subscribe({
+            this.contact.postValue(contact)
+        },{
+
+        })
+
+    fun deleteContacts(contactsId: List<Int>): Disposable = repository.deleteContacts(contactsId)
         .subscribe({},{})
+
 
 }

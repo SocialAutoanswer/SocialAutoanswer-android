@@ -1,6 +1,7 @@
 package ru.bibaboba.core_db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import io.reactivex.rxjava3.core.Completable
@@ -19,4 +20,7 @@ interface ContactDAO {
 
     @Insert
     fun insertContact(contact: Contact): Completable
+
+    @Query("delete from contacts where id in (:contactsId)")
+    fun deleteContacts(contactsId: List<Int>): Completable
 }

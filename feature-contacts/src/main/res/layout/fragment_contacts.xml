@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,8 +19,19 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:clickable="true"
-        android:src="@drawable/item_background"
+        android:src="@drawable/ic_plus"
+        android:scaleType="fitCenter"
         android:layout_gravity="center|right"
+        android:layout_margin="20dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete_contacts_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:src="@drawable/item_background"
+        android:layout_gravity="center|right|bottom"
+        android:visibility="invisible"
         android:layout_margin="20dp"/>
 
 

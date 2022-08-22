@@ -2,5 +2,6 @@
 <resources>
 
     <color name="item_color">#1E1E1E</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

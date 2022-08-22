@@ -1,6 +1,7 @@
 package ru.bibaboba.core_android
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -29,7 +30,13 @@ abstract class BaseRecyclerViewAdapter<DATA : Any, B : ViewBinding>
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun clearItems() {
+    fun deleteItems(items: List<DATA>){
+        this.items.removeAll(items)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clear() {
         this.items.clear()
         notifyDataSetChanged()
     }
@@ -47,9 +54,12 @@ abstract class BaseRecyclerViewAdapter<DATA : Any, B : ViewBinding>
 
         fun bind(item: DATA, position: Int) {
             callbacks.bindViews(binding, item, position)
-            binding.root.setOnClickListener { callbacks.onViewClicked(binding.root, item) }
+            binding.root.setOnClickListener { callbacks.onViewClicked(position, item) }
+            binding.root.setOnLongClickListener {
+                callbacks.onViewLongCLicked(position, item)
+                true
+            }
         }
-
     }
 
 }

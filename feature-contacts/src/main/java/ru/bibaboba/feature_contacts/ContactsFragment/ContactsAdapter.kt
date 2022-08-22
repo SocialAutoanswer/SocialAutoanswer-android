@@ -1,7 +1,6 @@
 package ru.bibaboba.feature_contacts.ContactsFragment
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import ru.bibaboba.core_android.AdapterCallback
 import ru.bibaboba.core_android.BaseRecyclerViewAdapter
@@ -10,11 +9,42 @@ import ru.bibaboba.feature_contacts.databinding.ItemContactBinding
 
 class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
 
-    private var onContactClick: (Contact) -> Unit = {}
+    val selectedContacts = mutableListOf<Contact>()
+    private val isSelected = HashMap<Int, Boolean>()
 
-    fun setOnContactClickListener(listener: (Contact) -> Unit){
+    private var onContactClick: (Int, Contact) -> Unit = { pos: Int, contact: Contact -> }
+    private var onContactLongClick: (Int, Contact) -> Unit = { pos: Int, contact: Contact -> }
+
+    fun setOnContactClickListener(listener: (Int, Contact) -> Unit){
         onContactClick = listener
     }
+
+    fun setOnContactLongClickListener(listener: (Int, Contact) -> Unit){
+        onContactLongClick = listener
+    }
+
+    fun changeState(pos: Int){
+
+        if(pos in isSelected){
+            isSelected[pos] = !isSelected[pos]!!
+        }else{
+            isSelected[pos] = true
+        }
+
+        notifyItemChanged(pos)
+
+    }
+
+    fun unselectAll(){
+        for(key in isSelected.keys){
+            isSelected[key] = false
+        }
+
+        isSelected.clear()
+        notifyDataSetChanged()
+    }
+
+    fun getState(pos: Int) = isSelected[pos]
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,12 +52,15 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
     ): ViewHolder<Contact, ItemContactBinding> = ViewHolder(
         ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false),
         object : AdapterCallback<Contact, ItemContactBinding>{
+
             override fun bindViews(binding: ItemContactBinding, item: Contact, position: Int) {
                 binding.name.text = item.name
                 binding.description.text = item.description
+                binding.root.isSelected = isSelected[position] ?: false
             }
 
-            override fun onViewClicked(view: View, item: Contact) = onContactClick(item)
+            override fun onViewClicked(position: Int, item: Contact) = onContactClick(position, item)
+            override fun onViewLongCLicked(position: Int, item: Contact) = onContactLongClick(position, item)
 
         }
     )

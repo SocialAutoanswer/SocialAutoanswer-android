@@ -1,4 +1,4 @@
-package ru.bibaboba.feature_contacts
+package ru.bibaboba.feature_contacts.di
 
 import android.content.Context
 import androidx.room.Room

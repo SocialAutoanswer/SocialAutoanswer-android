@@ -7,6 +7,8 @@ interface AdapterCallback<DATA : Any, B : ViewBinding>{
 
     fun bindViews(binding : B, item: DATA, position: Int)
 
-    fun onViewClicked(view: View, item: DATA)
+    fun onViewClicked(position: Int, item: DATA)
+
+    fun onViewLongCLicked(position: Int, item: DATA)
 
 }

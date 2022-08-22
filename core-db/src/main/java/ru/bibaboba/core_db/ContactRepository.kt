@@ -17,4 +17,8 @@ class ContactRepository(private val dao: ContactDAO) {
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.io())
 
+    fun deleteContacts(contactsId: List<Int>) = dao.deleteContacts(contactsId)
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+
 }

@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_contact"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@drawable/item_background">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/item_color">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@color/cardview_dark_background"
+            android:src="@drawable/ic_id"
             android:layout_gravity="center"
-            android:layout_margin="5dp"/>
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,16 +24,21 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
                 android:text="name"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
                 android:text="description"/>
 
         </LinearLayout>
 
-    </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>
