@@ -41,6 +41,7 @@ abstract class BaseRecyclerViewAdapter<DATA : Any, B : ViewBinding>
         notifyDataSetChanged()
     }
 
+
     abstract override fun onCreateViewHolder(parent: ViewGroup, position: Int) : ViewHolder<DATA, B>
 
     override fun getItemCount(): Int = items.size

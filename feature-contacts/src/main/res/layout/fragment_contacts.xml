@@ -7,32 +7,62 @@
     android:orientation="vertical"
     tools:context=".ContactsFragment.ContactsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize">
+
+
+            <EditText
+                android:id="@+id/search_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:layout_margin="10dp"/>
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_magnifier"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_contact_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:clickable="true"
-        android:src="@drawable/ic_plus"
-        android:scaleType="fitCenter"
         android:layout_gravity="center|right"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_plus" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/delete_contacts_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_gravity="center|right|bottom"
+        android:layout_margin="20dp"
         android:clickable="true"
         android:src="@drawable/item_background"
-        android:layout_gravity="center|right|bottom"
-        android:visibility="invisible"
-        android:layout_margin="20dp"/>
-
+        android:visibility="invisible" />
 
 </FrameLayout>

@@ -36,6 +36,7 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
 
         binding = FragmentContactsBinding.inflate(inflater, container, false)
         binding.recycler.adapter = adapter
+        binding.searchText.addTextChangedListener(viewModel.searchTextWatcher)
 
         viewModel.getAllContacts()
         viewModel.setContactsObserver{ adapter.setItems(it) }
@@ -96,5 +97,7 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
         adapter.unselectAll()
         adapter.selectedContacts.clear()
     }
+
+
 }
 

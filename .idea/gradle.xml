@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/core-entities" />
             <option value="$PROJECT_DIR$/core-navigation" />
             <option value="$PROJECT_DIR$/core-reply" />
+            <option value="$PROJECT_DIR$/core-utils" />
             <option value="$PROJECT_DIR$/feature-contacts" />
           </set>
         </option>

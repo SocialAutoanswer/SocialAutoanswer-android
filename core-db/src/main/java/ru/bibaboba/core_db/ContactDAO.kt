@@ -1,13 +1,15 @@
 package ru.bibaboba.core_db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.selects.select
 import ru.bibaboba.core_entities.Contact
+import java.util.regex.Pattern
 
 @Dao
 interface ContactDAO {
@@ -23,4 +25,5 @@ interface ContactDAO {
 
     @Query("delete from contacts where id in (:contactsId)")
     fun deleteContacts(contactsId: List<Int>): Completable
+
 }

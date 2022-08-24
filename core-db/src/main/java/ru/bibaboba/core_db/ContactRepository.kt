@@ -1,9 +1,12 @@
 package ru.bibaboba.core_db
 
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.core_entities.Contact
+import java.util.regex.Pattern
 
 class ContactRepository(private val dao: ContactDAO) {
+
 
     fun addContact(contact: Contact) = dao.insertContact(contact)
         .subscribeOn(Schedulers.io())
@@ -22,3 +25,4 @@ class ContactRepository(private val dao: ContactDAO) {
         .observeOn(Schedulers.io())
 
 }
+
