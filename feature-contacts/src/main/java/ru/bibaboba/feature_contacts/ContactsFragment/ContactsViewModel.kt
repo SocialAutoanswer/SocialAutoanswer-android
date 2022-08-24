@@ -42,7 +42,8 @@ class ContactsViewModel: ViewModel() {
     fun deleteContacts(contactsId: List<Int>): Disposable = repository.deleteContacts(contactsId)
         .subscribe({},{})
 
-    val searchTextWatcher = object: SimpleTextWatcher {
+
+    private val searchTextWatcher = object: SimpleTextWatcher {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             val request = s.toString()
@@ -63,10 +64,11 @@ class ContactsViewModel: ViewModel() {
 
                 })
 
-
         }
 
     }
+
+    fun getSearcherTextWatcher() = searchTextWatcher
 
 
 }

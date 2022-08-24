@@ -1,5 +1,6 @@
 package ru.bibaboba.feature_contacts.ContactsFragment
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.bibaboba.core_android.AdapterCallback
@@ -35,6 +36,7 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun unselectAll(){
         for(key in isSelected.keys){
             isSelected[key] = false
@@ -56,7 +58,8 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
             override fun bindViews(binding: ItemContactBinding, item: Contact, position: Int) {
                 binding.name.text = item.name
                 binding.description.text = item.description
-                binding.root.isSelected = isSelected[position] ?: false
+                binding.chosenMark.visibility =
+                    if(isSelected[position] == true) ViewGroup.VISIBLE else ViewGroup.INVISIBLE
             }
 
             override fun onViewClicked(position: Int, item: Contact) = onContactClick(position, item)

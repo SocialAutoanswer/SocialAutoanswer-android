@@ -36,7 +36,7 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
 
         binding = FragmentContactsBinding.inflate(inflater, container, false)
         binding.recycler.adapter = adapter
-        binding.searchText.addTextChangedListener(viewModel.searchTextWatcher)
+        binding.searchText.addTextChangedListener(viewModel.getSearcherTextWatcher())
 
         viewModel.getAllContacts()
         viewModel.setContactsObserver{ adapter.setItems(it) }
@@ -48,6 +48,7 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
                 bundleOf(CONTROLLER_BUNDLE to this)
             )
         }
+
         binding.deleteContactsButton.setOnClickListener{ deleteContacts() }
 
         adapter.setOnContactClickListener { pos: Int, item: Contact ->

@@ -7,38 +7,53 @@
     android:background="@drawable/item_background">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_id"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"/>
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
 
-        <LinearLayout
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:src="@drawable/ic_id"
+            android:layout_gravity="center"/>
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:text="name"/>
+        <ImageView
+            android:id="@+id/chosen_mark"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_round_checkmark"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"/>
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
-                android:text="description"/>
+    </RelativeLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:text="name"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:text="description"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

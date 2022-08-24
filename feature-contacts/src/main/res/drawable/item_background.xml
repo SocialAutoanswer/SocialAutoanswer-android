@@ -9,14 +9,4 @@
         </shape>
     </item>
 
-    <item android:state_selected="true">
-        <shape android:shape="rectangle">
-            <corners android:radius="10dp"/>
-            <solid android:color="@color/item_color"/>
-            <stroke
-                android:color="#FF0000"
-                android:width="3dp"/>
-        </shape>
-    </item>
-
 </selector>

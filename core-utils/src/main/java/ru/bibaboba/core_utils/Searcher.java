@@ -2,6 +2,7 @@ package ru.bibaboba.core_utils;
 
 import androidx.annotation.NonNull;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Searcher<T extends Searchable> {
 
@@ -23,9 +24,7 @@ public class Searcher<T extends Searchable> {
         String[] singleWords = getSingleWords(lowerCaseWhereSearch);
 
         for (String singleWord : singleWords) {
-            if (singleWord.length() <= 3) {
-                return false;
-            }
+
             double quantity = 0;
             int length = Math.min(request.length(), singleWord.length());
 
@@ -33,10 +32,8 @@ public class Searcher<T extends Searchable> {
                 if (request.charAt(i) != singleWord.charAt(i))
                     quantity++;
             }
-            //Log.d(ConstantsKt.getSEARCHER_TAG(), "Запрос: " + request + "(" + request.length() + ")");
-            //Log.d(ConstantsKt.getSEARCHER_TAG(), "Где ищем: " + whereSearch + "(" + whereSearch.length() + ")");
-            //Log.d(ConstantsKt.getSEARCHER_TAG(), "Процент ошибок (" + quantity + "): " + quantity/length*100);
-            if (quantity / length < 0.25 || lowerCaseWhereSearch.contains(request)) {
+
+            if (quantity / length < 0.25 || lowerCaseWhereSearch.contains(request.toLowerCase())) {
                 return true;
             }
         }
