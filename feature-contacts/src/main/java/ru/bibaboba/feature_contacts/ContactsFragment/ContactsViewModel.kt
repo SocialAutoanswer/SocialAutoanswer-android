@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 import ru.bibaboba.core_db.ContactRepository
 import ru.bibaboba.core_entities.Contact
+import ru.bibaboba.core_utils.ItemChoosingListener
 import ru.bibaboba.core_utils.Searcher
 import ru.bibaboba.core_utils.SimpleTextWatcher
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class ContactsViewModel: ViewModel() {
 
     private val contacts = MutableLiveData<ArrayList<Contact>>()
     private val contact = MutableLiveData<Contact>()
+    private val amount = MutableLiveData<Int>()
 
     fun setContactsObserver(observer: (ArrayList<Contact>) -> Unit) =
         contacts.observeForever(observer)
@@ -24,9 +26,13 @@ class ContactsViewModel: ViewModel() {
     fun setContactObserver(observer: (Contact) -> Unit) =
         contact.observeForever(observer)
 
+    fun setAmountObserver(observer: (Int) -> Unit) =
+        amount.observeForever(observer)
+
 
     fun getAllContacts(): Disposable = repository.getAllContacts()
         .subscribe({
+            contactCount()
             contacts.postValue(it as ArrayList<Contact>)
         }, {
 
@@ -34,13 +40,25 @@ class ContactsViewModel: ViewModel() {
 
     fun addContact(contact: Contact): Disposable = repository.addContact(contact)
         .subscribe({
+            contactCount()
             this.contact.postValue(contact)
         },{
 
         })
 
     fun deleteContacts(contactsId: List<Int>): Disposable = repository.deleteContacts(contactsId)
-        .subscribe({},{})
+        .subscribe({
+            contactCount()
+        },{
+
+        })
+
+    fun contactCount(): Disposable = repository.contactCount()
+        .subscribe({
+            amount.postValue(it)
+        },{
+
+        })
 
 
     private val searchTextWatcher = object: SimpleTextWatcher {

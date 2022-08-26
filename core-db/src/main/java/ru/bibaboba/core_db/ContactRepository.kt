@@ -24,5 +24,9 @@ class ContactRepository(private val dao: ContactDAO) {
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.io())
 
+    fun contactCount() = dao.contactCount()
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+
 }
 

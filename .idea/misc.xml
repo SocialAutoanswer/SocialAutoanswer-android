@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/app/src/main/res/layout/activity_main.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/app/src/main/res/layout/contact_action_toolbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/app/src/main/res/menu/contact_actions.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/core-android/src/main/res/layout/pattern_notify_screen.xml" value="0.253125" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/dialog_background.xml" value="0.209" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/ic_avatar.xml" value="0.209" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/ic_id.xml" value="0.209" />
@@ -12,10 +15,12 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/ic_round_checkmark.xml" value="0.209" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/item_background.xml" value="0.209" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/drawable/text_background.xml" value="0.209" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/layout/contact_action_toolbar.xml" value="0.264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/layout/fragment_add_contact.xml" value="0.1" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/layout/fragment_contacts.xml" value="0.264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/layout/fragment_redact_contact.xml" value="0.18115942028985507" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/layout/item_contact.xml" value="0.4" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SocialAutoanswer-android/feature-contacts/src/main/res/menu/contact_actions.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

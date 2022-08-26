@@ -1,6 +1,5 @@
 package ru.bibaboba.core_android
 
-import android.view.View
 import androidx.viewbinding.ViewBinding
 
 interface AdapterCallback<DATA : Any, B : ViewBinding>{

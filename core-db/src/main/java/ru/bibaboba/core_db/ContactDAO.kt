@@ -26,4 +26,7 @@ interface ContactDAO {
     @Query("delete from contacts where id in (:contactsId)")
     fun deleteContacts(contactsId: List<Int>): Completable
 
+    @Query("select count(*) from contacts")
+    fun contactCount(): Single<Int>
+
 }

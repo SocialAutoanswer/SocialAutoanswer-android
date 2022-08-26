@@ -1,8 +1,10 @@
 package ru.bibaboba.feature_contacts.ContactsFragment
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import ru.bibaboba.core_android.AdapterCallback
 import ru.bibaboba.core_android.BaseRecyclerViewAdapter
 import ru.bibaboba.core_entities.Contact
@@ -24,6 +26,7 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
         onContactLongClick = listener
     }
 
+
     fun changeState(pos: Int){
 
         if(pos in isSelected){
@@ -43,6 +46,16 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
         }
 
         isSelected.clear()
+        notifyDataSetChanged()
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun selectAll(){
+        for(key in isSelected.keys){
+            isSelected[key] = true
+        }
+
         notifyDataSetChanged()
     }
 
