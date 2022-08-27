@@ -7,6 +7,7 @@
     tools:menu="@menu/contact_actions">
 
     <ImageButton
+        android:id="@+id/stop_selecting"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="fitCenter"
@@ -16,6 +17,7 @@
 
 
     <ImageButton
+        android:id="@+id/delete_selected"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="fitCenter"

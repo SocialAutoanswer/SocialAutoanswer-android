@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,7 +29,13 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
 
     private lateinit var binding: FragmentContactsBinding
     private val adapter by lazy { ContactsAdapter() }
-    private var recyclerEmptyFlag = true
+
+    private val selectingBackPressed = object: OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            stopSelecting()
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +53,6 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
         viewModel.setAmountObserver { fillContainer(it) }
 
         binding.addContactButton.setOnClickListener{ openAddContactFragment() }
-        binding.deleteContactsButton.setOnClickListener{ deleteContacts() }
 
         adapter.setOnContactClickListener { pos: Int, item: Contact ->
             if(adapter.selectedContacts.isEmpty())
@@ -57,26 +63,25 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
 
         adapter.setOnContactLongClickListener { pos: Int, item: Contact ->
             if(adapter.selectedContacts.isEmpty())
-                ChoosingListener.onChoosingListener.isChoosing(true)
+                startChoosing()
 
             changeItemState(pos, item)
         }
 
+
         return binding.root
     }
+
 
     //реализация ContactRecyclerController
     override fun addContact(contact: Contact) { viewModel.addContact(contact) }
     //конец
-
 
     private fun fillContainer(amount: Int){
 
         val onNotifyButtonClick: (view:View) -> Unit = { openAddContactFragment() }
 
         if(amount == 0){
-            recyclerEmptyFlag = true
-
             binding.container.removeAllViews()
             binding.container.addView(overplaceEmptyList(
                 binding.container,
@@ -86,8 +91,6 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
                 onNotifyButtonClick
             ))
         } else{
-            recyclerEmptyFlag = false
-
             binding.container.removeAllViews()
             binding.container.addView(
                 createRecyclerView(requireContext(), adapter, LinearLayoutManager(requireContext()))
@@ -113,11 +116,8 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
             adapter.selectedContacts.remove(contact)
         }
 
-        binding.deleteContactsButton.visibility =
-            if(adapter.selectedContacts.isEmpty()) View.INVISIBLE else View.VISIBLE
-
         if(adapter.selectedContacts.isEmpty())
-            ChoosingListener.onChoosingListener.isChoosing(false)
+            ChoosingListener.onChoosingListener.notChoosing()
 
     }
 
@@ -130,13 +130,18 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
         adapter.deleteItems(adapter.selectedContacts)
         viewModel.deleteContacts(chosenContactsId)
 
-        binding.deleteContactsButton.visibility = View.INVISIBLE
-
-        adapter.unselectAll()
-        adapter.selectedContacts.clear()
-        ChoosingListener.onChoosingListener.isChoosing(false)
+        stopSelecting()
     }
 
+    private fun startChoosing(){
+        ChoosingListener.onChoosingListener.isChoosing({ deleteContacts() }, { stopSelecting() })
+        //requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, selectingBackPressed)
+    }
+
+    private fun stopSelecting(){
+        adapter.unselectAll()
+        adapter.selectedContacts.clear()
+        ChoosingListener.onChoosingListener.notChoosing()
+    }
 
 }
-

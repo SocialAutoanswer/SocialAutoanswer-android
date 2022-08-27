@@ -55,14 +55,4 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_plus" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/delete_contacts_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center|right|bottom"
-        android:layout_margin="20dp"
-        android:clickable="true"
-        android:src="@drawable/item_background"
-        android:visibility="invisible" />
-
 </FrameLayout>
