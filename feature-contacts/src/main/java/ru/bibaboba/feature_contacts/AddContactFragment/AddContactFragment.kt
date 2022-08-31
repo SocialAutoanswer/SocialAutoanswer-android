@@ -2,12 +2,14 @@ package ru.bibaboba.feature_contacts.AddContactFragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 import ru.bibaboba.core_entities.Contact
 import ru.bibaboba.core_utils.SimpleTextWatcher
 import ru.bibaboba.feature_contacts.ContactRecyclerController
@@ -33,6 +35,7 @@ class AddContactFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +45,7 @@ class AddContactFragment : Fragment() {
 
         binding.saveButton.setOnClickListener{ save(binding) }
         binding.cancelButton.setOnClickListener{ cancel() }
+        binding.avatar.setOnClickListener{ addAvatar() }
 
         binding.name.addTextChangedListener(textWatcher)
 
@@ -69,6 +73,15 @@ class AddContactFragment : Fragment() {
         )
 
         cancel()
+    }
+
+    private fun getAvatar(){
+
+
+    }
+
+    private fun addAvatar(){
+
     }
 
 }

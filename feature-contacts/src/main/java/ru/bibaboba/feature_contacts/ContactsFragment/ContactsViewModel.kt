@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 import ru.bibaboba.core_db.ContactRepository
 import ru.bibaboba.core_entities.Contact
-import ru.bibaboba.core_utils.ItemChoosingListener
-import ru.bibaboba.core_utils.Searcher
 import ru.bibaboba.core_utils.SimpleTextWatcher
 import javax.inject.Inject
 

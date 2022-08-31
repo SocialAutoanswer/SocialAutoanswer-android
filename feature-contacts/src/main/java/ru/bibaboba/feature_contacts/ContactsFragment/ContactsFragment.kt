@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.bibaboba.core_android.createRecyclerView
 import ru.bibaboba.core_android.overplaceEmptyList
 import ru.bibaboba.core_entities.Contact
-import ru.bibaboba.core_utils.ChoosingListener
+import ru.bibaboba.core_utils.SelectingListener
 import ru.bibaboba.feature_contacts.*
 import ru.bibaboba.feature_contacts.databinding.FragmentContactsBinding
 import ru.bibaboba.feature_contacts.di.ContactComponent
@@ -29,12 +29,6 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
 
     private lateinit var binding: FragmentContactsBinding
     private val adapter by lazy { ContactsAdapter() }
-
-    private val selectingBackPressed = object: OnBackPressedCallback(true){
-        override fun handleOnBackPressed() {
-            stopSelecting()
-        }
-    }
 
 
     override fun onCreateView(
@@ -55,14 +49,14 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
         binding.addContactButton.setOnClickListener{ openAddContactFragment() }
 
         adapter.setOnContactClickListener { pos: Int, item: Contact ->
-            if(adapter.selectedContacts.isEmpty())
+            if(adapter.atLeastOneContactSelected())
                 findNavController().navigate(ru.bibaboba.core_navigation.R.id.redactContactFragment)
             else
                 changeItemState(pos, item)
         }
 
         adapter.setOnContactLongClickListener { pos: Int, item: Contact ->
-            if(adapter.selectedContacts.isEmpty())
+            if(adapter.atLeastOneContactSelected())
                 startChoosing()
 
             changeItemState(pos, item)
@@ -108,40 +102,34 @@ class ContactsFragment : Fragment(), ContactRecyclerController {
     }
 
     private fun changeItemState(pos: Int, contact: Contact){
-        adapter.changeState(pos)
+        adapter.changeItemState(pos)
 
-        if(adapter.getState(pos) == true){
-            adapter.selectedContacts.add(contact)
+        if(adapter.getItemState(pos) == true){
+            adapter.selectContact(pos, contact)
         }else{
-            adapter.selectedContacts.remove(contact)
+            adapter.unselectContact(pos, contact)
         }
 
-        if(adapter.selectedContacts.isEmpty())
-            ChoosingListener.onChoosingListener.notChoosing()
-
+        if(adapter.atLeastOneContactSelected())
+            stopSelecting()
     }
 
     private fun deleteContacts(){
-
-        val chosenContactsId = mutableListOf<Int>()
-
-        adapter.selectedContacts.forEach{ chosenContactsId.add(it.id) }
-
-        adapter.deleteItems(adapter.selectedContacts)
-        viewModel.deleteContacts(chosenContactsId)
+        adapter.deleteSelectedContacts()
+        viewModel.deleteContacts(adapter.getSelectedContactsIds())
 
         stopSelecting()
     }
 
     private fun startChoosing(){
-        ChoosingListener.onChoosingListener.isChoosing({ deleteContacts() }, { stopSelecting() })
-        //requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, selectingBackPressed)
+        SelectingListener.onSelectingListener.isChoosing({ deleteContacts() }, { stopSelecting() })
+
     }
 
     private fun stopSelecting(){
         adapter.unselectAll()
-        adapter.selectedContacts.clear()
-        ChoosingListener.onChoosingListener.notChoosing()
+        SelectingListener.onSelectingListener.notChoosing()
+
     }
 
 }

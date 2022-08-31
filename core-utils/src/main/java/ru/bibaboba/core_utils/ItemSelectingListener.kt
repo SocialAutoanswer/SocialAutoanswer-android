@@ -1,8 +1,7 @@
 package ru.bibaboba.core_utils
 
-import androidx.activity.OnBackPressedCallback
 
-interface ItemChoosingListener {
+interface ItemSelectingListener {
 
     fun isChoosing(delete: () -> Unit, cancel: () -> Unit)
     fun notChoosing()

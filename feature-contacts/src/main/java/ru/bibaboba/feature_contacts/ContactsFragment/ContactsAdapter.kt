@@ -12,7 +12,7 @@ import ru.bibaboba.feature_contacts.databinding.ItemContactBinding
 
 class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
 
-    val selectedContacts = mutableListOf<Contact>()
+    private val selectedContacts = mutableListOf<Contact>()
     private val isSelected = HashMap<Int, Boolean>()
 
     private var onContactClick: (Int, Contact) -> Unit = { pos: Int, contact: Contact -> }
@@ -27,7 +27,7 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
     }
 
 
-    fun changeState(pos: Int){
+    fun changeItemState(pos: Int){
 
         if(pos in isSelected){
             isSelected[pos] = !isSelected[pos]!!
@@ -39,6 +39,24 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
 
     }
 
+
+    fun selectContact(pos: Int, contact: Contact){
+        isSelected[pos] = true
+        selectedContacts.add(contact)
+        notifyItemChanged(pos)
+    }
+
+    fun unselectContact(pos: Int, contact: Contact){
+        isSelected[pos] = false
+        selectedContacts.remove(contact)
+        notifyItemChanged(pos)
+    }
+
+    fun deleteSelectedContacts(){
+        deleteItems(selectedContacts)
+    }
+
+
     @SuppressLint("NotifyDataSetChanged")
     fun unselectAll(){
         for(key in isSelected.keys){
@@ -46,6 +64,7 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
         }
 
         isSelected.clear()
+        selectedContacts.clear()
         notifyDataSetChanged()
     }
 
@@ -59,7 +78,16 @@ class ContactsAdapter: BaseRecyclerViewAdapter<Contact, ItemContactBinding>() {
         notifyDataSetChanged()
     }
 
-    fun getState(pos: Int) = isSelected[pos]
+    fun getSelectedContactsIds(): MutableList<Int> {
+        val chosenContactsId = mutableListOf<Int>()
+        selectedContacts.forEach{ chosenContactsId.add(it.id) }
+        return chosenContactsId
+    }
+
+    fun atLeastOneContactSelected() = selectedContacts.isEmpty()
+
+    fun getItemState(pos: Int) = isSelected[pos]
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
